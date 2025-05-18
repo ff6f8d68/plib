@@ -49,6 +49,16 @@ function gui.set_style(name)
         error("Unknown style: " .. name)
     end
 end
+function gui.drawPixel(win, relX, relY, colorChar)
+    local absX = win.x + relX
+    local absY = win.y + relY
+
+    -- Make sure the pixel is inside the window bounds (optional)
+    if absX >= win.x and absX < win.x + win.w and absY >= win.y and absY < win.y + win.h then
+        term.setCursorPos(absX, absY)
+        term.blit(" ", "0", colorChar)
+    end
+end
 
 -- Window
 function gui.window(title, x, y, w, h)
